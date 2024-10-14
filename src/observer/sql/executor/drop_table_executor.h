@@ -9,10 +9,24 @@ MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
 See the Mulan PSL v2 for more details. */
 
 //
-// Created by Wangyunlai on 2022/12/15
+// Created by Wangyunlai on 2023/6/13.
 //
 
-#include "sql/operator/project_logical_operator.h"
+#pragma once
 
-ProjectLogicalOperator::ProjectLogicalOperator(const std::vector<Field> &fields) : fields_(fields)
-{}
+#include "common/rc.h"
+
+class SQLStageEvent;
+
+/**
+ * @brief 删除表的执行器
+ * @ingroup Executor
+ */
+class DropTableExecutor
+{
+public:
+  DropTableExecutor() = default;
+  virtual ~DropTableExecutor() = default;
+
+  RC execute(SQLStageEvent *sql_event);
+};
