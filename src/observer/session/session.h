@@ -34,21 +34,21 @@ public:
   static Session &default_session();
 
 public:
-  Session() = default;
+  Session() = default;// 默认构造函数
   ~Session();
 
   Session(const Session &other);
-  void operator=(Session &) = delete;
+  void operator=(Session &) = delete;// 禁止赋值
 
-  const char *get_current_db_name() const;
-  Db *get_current_db() const;
+  const char *get_current_db_name() const;// 获取当前会话关联的数据库名字
+  Db *get_current_db() const;// 获取当前会话关联的数据库
 
   /**
    * @brief 设置当前会话关联的数据库
    * 
    * @param dbname 数据库名字
    */
-  void set_current_db(const std::string &dbname);
+  void set_current_db(const std::string &dbname);// 设置当前会话关联的数据库
 
   /**
    * @brief 设置当前事务为多语句模式，需要明确的指出提交或回滚
@@ -64,7 +64,7 @@ public:
    * @brief 当前会话关联的事务
    * 
    */
-  Trx *current_trx();
+  Trx *current_trx();// 获取当前会话关联的事务
 
   /**
    * @brief 设置当前正在处理的请求
@@ -74,10 +74,10 @@ public:
   /**
    * @brief 获取当前正在处理的请求
    */
-  SessionEvent *current_request() const;
+  SessionEvent *current_request() const;// 获取当前正在处理的请求
 
-  void set_sql_debug(bool sql_debug) { sql_debug_ = sql_debug; }
-  bool sql_debug_on() const { return sql_debug_; }
+  void set_sql_debug(bool sql_debug) { sql_debug_ = sql_debug; }// 设置是否输出SQL调试信息
+  bool sql_debug_on() const { return sql_debug_; }// 是否输出SQL调试信息
 
   /**
    * @brief 将指定会话设置到线程变量中
@@ -92,8 +92,8 @@ public:
   static Session *current_session();
   
 private:
-  Db *db_ = nullptr;
-  Trx *trx_ = nullptr;
+  Db *db_ = nullptr;// 当前会话关联的数据库
+  Trx *trx_ = nullptr;// 当前会话关联的事务
   SessionEvent *current_request_ = nullptr; ///< 当前正在处理的请求
   bool trx_multi_operation_mode_ = false;   ///< 当前事务的模式，是否多语句模式. 单语句模式自动提交
   bool sql_debug_ = false;                  ///< 是否输出SQL调试信息

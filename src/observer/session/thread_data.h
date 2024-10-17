@@ -20,21 +20,21 @@ class Session;
 class ThreadData
 {
 public:
-  static ThreadData *current() { return thread_data_; }
-  static void setup(ThreadData *thread) { thread_data_ = thread; }
+  static ThreadData *current() { return thread_data_; }//返回当前线程的ThreadData
+  static void setup(ThreadData *thread) { thread_data_ = thread; }//设置当前线程的ThreadData
 
 public:
-  ThreadData() = default;
-  ~ThreadData() = default;
+  ThreadData() = default;//构造函数
+  ~ThreadData() = default;//析构函数
 
-  Session *session() const { return session_; }
-  Trx * trx() const;
+  Session *session() const { return session_; }//返回当前线程的Session
+  Trx * trx() const;//返回当前线程的事务
 
-  void set_session(Session *session) { session_ = session; }
-
-private:
-  static thread_local ThreadData * thread_data_;
+  void set_session(Session *session) { session_ = session; }//设置当前线程的Session
 
 private:
-  Session *session_ = nullptr;
+  static thread_local ThreadData * thread_data_;//当前线程的ThreadData
+
+private:
+  Session *session_ = nullptr;//当前线程的Session
 };

@@ -27,16 +27,16 @@ See the Mulan PSL v2 for more details. */
 class SqlDebug
 {
 public:
-  SqlDebug() = default;
-  virtual ~SqlDebug() = default;
+  SqlDebug() = default;//构造函数
+  virtual ~SqlDebug() = default;//析构函数
 
-  void add_debug_info(const std::string &debug_info);
-  void clear_debug_info();
+  void add_debug_info(const std::string &debug_info);//增加调试信息
+  void clear_debug_info();//清空调试信息
 
-  const std::list<std::string> &get_debug_infos() const;
+  const std::list<std::string> &get_debug_infos() const;//返回调试信息的引用
 
 private:
-  std::list<std::string> debug_infos_;
+  std::list<std::string> debug_infos_;//调试信息
 };
 
 /**
@@ -45,4 +45,4 @@ private:
  * 如果当前上下文不在SQL执行过程中，那么不会生成调试信息。
  * 在普通文本场景下，调试信息会直接输出到客户端，并增加 '#' 作为前缀。
  */
-void sql_debug(const char *fmt, ...);
+void sql_debug(const char *fmt, ...);// 增加SQL的调试信息，变参函数

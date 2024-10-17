@@ -31,19 +31,19 @@ class Communicator;
 class SessionEvent : public common::StageEvent 
 {
 public:
-  SessionEvent(Communicator *client);
+  SessionEvent(Communicator *client);//构造函数 接受客户端通讯对象
   virtual ~SessionEvent();
 
-  Communicator *get_communicator() const;
-  Session *session() const;
+  Communicator *get_communicator() const;//获取客户端通讯对象
+  Session *session() const;//获取会话
 
-  void set_query(const std::string &query) { query_ = query; }
+  void set_query(const std::string &query) { query_ = query; }//设置SQL语句
 
-  const std::string &query() const { return query_; }
+  const std::string &query() const { return query_; }//获取SQL语句
 
-  SqlResult *sql_result() { return &sql_result_; }
+  SqlResult *sql_result() { return &sql_result_; }//获取SQL执行结果
 
-  SqlDebug &sql_debug() { return sql_debug_; }
+  SqlDebug &sql_debug() { return sql_debug_; }//获取SQL调试信息
 
 private:
   Communicator *communicator_ = nullptr;  ///< 与客户端通讯的对象

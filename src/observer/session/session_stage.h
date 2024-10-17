@@ -41,25 +41,25 @@ class SessionStage : public common::Stage
 {
 public:
   virtual ~SessionStage();
-  static Stage *make_stage(const std::string &tag);
+  static Stage *make_stage(const std::string &tag);// 创建一个session阶段
 
 protected:
   // common function
-  SessionStage(const char *tag);
-  bool set_properties() override;
+  SessionStage(const char *tag);// 构造函数
+  bool set_properties() override;// 设置属性
 
-  bool initialize() override;
-  void cleanup() override;
-  void handle_event(common::StageEvent *event) override;
+  bool initialize() override;// 初始化
+  void cleanup() override;// 清理
+  void handle_event(common::StageEvent *event) override;// 处理事件
 
 protected:
-  void handle_request(common::StageEvent *event);
-  RC   handle_sql(SQLStageEvent *sql_event);
+  void handle_request(common::StageEvent *event);// 处理请求
+  RC   handle_sql(SQLStageEvent *sql_event);// 处理sql请求
 
 private:
-  QueryCacheStage query_cache_stage_;
-  ParseStage      parse_stage_;
-  ResolveStage    resolve_stage_;
-  OptimizeStage   optimize_stage_;
-  ExecuteStage    execute_stage_;
+  QueryCacheStage query_cache_stage_;// 查询缓存
+  ParseStage      parse_stage_;// 解析
+  ResolveStage    resolve_stage_;// 解析
+  OptimizeStage   optimize_stage_;// 优化
+  ExecuteStage    execute_stage_;// 执行
 };
