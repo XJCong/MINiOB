@@ -100,6 +100,26 @@ RC Db::create_table(const char *table_name, int attribute_count, const AttrInfoS
   LOG_INFO("Create table success. table name=%s, table_id:%d", table_name, table_id);
   return RC::SUCCESS;
 }
+RC Db::drop_table(const char *table_name)
+{
+  // check table_name
+  if (opened_tables_.count(table_name) == 0) {
+    LOG_WARN("%s has been opened before.", table_name);
+    return RC::SCHEMA_TABLE_NOT_EXIST;
+  }
+
+  // 文件路径可以移到Table模块
+  std::string table_file_path = table_meta_file(path_.c_str(), table_name);
+  Table *table = find_table(table_name);
+  if(nullptr == table) {
+    LOG_ERROR("Failed to find table %s.", table_name);
+    return RC::SCHEMA_TABLE_NOT_EXIST;
+  }
+  table->drop(table_file_path.c_str());
+  delete table;
+  opened_tables_.erase(table_name);
+  return RC::SUCCESS;
+}
 
 Table *Db::find_table(const char *table_name) const
 {

@@ -15,7 +15,8 @@ See the Mulan PSL v2 for more details. */
 #include "session_event.h"
 #include "net/communicator.h"
 
-SessionEvent::SessionEvent(Communicator *comm) //构造函数的定义以及相关函数的实现
+SessionEvent::
+SessionEvent(Communicator *comm) //构造函数的定义以及相关函数的实现
     : communicator_(comm),
     sql_result_(communicator_->session())
 {}
